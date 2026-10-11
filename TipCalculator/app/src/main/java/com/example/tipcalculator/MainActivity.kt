@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import java.text.NumberFormat
+import kotlin.math.ceil
 
 class MainActivity: ComponentActivity(){
     override fun onCreate(savedInstanceState: Bundle?){
@@ -39,7 +40,7 @@ fun TipLayout(){
     var roundUp by remember {mutableStateOf(false)}
     val amount = amountInput.toDoubleOrNull() ?: 0.0
     val tipPercent=tipPercentInput.toDoubleOrNull() ?: 15.0
-    val tip = calculateTip(amount,tipPercent)
+    val tip = calculateTip(amount,tipPercent,roundUp)
 
     Column(
         modifier=Modifier
@@ -104,8 +105,13 @@ fun TipLayout(){
 
 private fun calculateTip(
     amount: Double,
-    tipPercent: Double =15.0
+    tipPercent: Double =15.0,
+    roundUp:Boolean =false
 ): String{
-    val tip = amount*tipPercent/100
+    var tip = amount*tipPercent/100
+
+    if(roundUp){
+        tip=ceil(tip)
+    }
     return NumberFormat.getCurrencyInstance().format(tip)
 }
