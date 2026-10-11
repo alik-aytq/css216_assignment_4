@@ -69,5 +69,28 @@ fun ArtSpaceLayout() {
                 fontSize = 16.sp
             )
         }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Button(
+                onClick = { },
+                modifier = Modifier.width(120.dp)
+            ) {
+                Text("Previous")
+            }
+
+            Button(
+                onClick = { },
+                modifier = Modifier.width(120.dp)
+            ) {
+                Text("Next")
+            }
+        }
+
     }
 }
