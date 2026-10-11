@@ -58,24 +58,18 @@ fun TipLayout(){
         )
         Spacer(modifier=Modifier.height(32.dp))
 
-        TextField(
+        EditNumberField(
             value=amountInput,
             onValueChange = {amountInput=it},
-            label={Text(stringResource(R.string.bill_amount))},
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number
-            )
+            label=stringResource(R.string.bill_amount)
         )
 
         Spacer(modifier=Modifier.height(16.dp))
 
-        TextField(
+        EditNumberField(
             value=tipPercentInput,
             onValueChange = {tipPercentInput=it},
-            label={Text(stringResource(R.string.tip_percentage))},
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number
-            )
+            label = stringResource(R.string.tip_percentage)
         )
 
         Spacer(modifier=Modifier.height(16.dp))
@@ -115,4 +109,20 @@ private fun calculateTip(
         tip=ceil(tip)
     }
     return NumberFormat.getCurrencyInstance().format(tip)
+}
+
+@Composable
+fun EditNumberField(
+    value: String,
+    onValueChange: (String)-> Unit,
+    label: String
+){
+    TextField(
+        value=value,
+        onValueChange=onValueChange,
+        label={Text(label)},
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Number
+        )
+    )
 }
