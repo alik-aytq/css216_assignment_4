@@ -18,7 +18,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import java.text.NumberFormat
 import kotlin.math.ceil
 import androidx.compose.ui.res.stringResource
@@ -27,6 +26,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.focus.FocusDirection
+import androidx.annotation.VisibleForTesting
+
 class MainActivity: ComponentActivity(){
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -40,9 +41,9 @@ class MainActivity: ComponentActivity(){
 
 @Composable
 fun TipLayout(){
-    var amountInput by rememberSaveable() {mutableStateOf("")}
-    var tipPercentInput by rememberSaveable() { mutableStateOf("") }
-    var roundUp by rememberSaveable() {mutableStateOf(false)}
+    var amountInput by rememberSaveable {mutableStateOf("")}
+    var tipPercentInput by rememberSaveable { mutableStateOf("") }
+    var roundUp by rememberSaveable {mutableStateOf(false)}
     val amount = amountInput.toDoubleOrNull() ?: 0.0
     val tipPercent=tipPercentInput.toDoubleOrNull() ?: 15.0
     val tip = calculateTip(amount,tipPercent,roundUp)
@@ -98,8 +99,8 @@ fun TipLayout(){
         )
     }
 }
-
-private fun calculateTip(
+@VisibleForTesting
+internal fun calculateTip(
     amount: Double,
     tipPercent: Double =15.0,
     roundUp:Boolean =false
