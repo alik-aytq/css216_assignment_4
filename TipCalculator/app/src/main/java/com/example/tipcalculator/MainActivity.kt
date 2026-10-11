@@ -78,14 +78,9 @@ fun TipLayout(){
             modifier=Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ){
-            Text(
-                text=stringResource(R.string.round_up_tip),
-                modifier=Modifier.weight(1f)
-            )
-
-            Switch(
-                checked = roundUp,
-                onCheckedChange = {roundUp=it}
+            RoundTheTipRow(
+                roundUp = roundUp,
+                onRoundUpChanged = { roundUp = it }
             )
         }
 
@@ -125,4 +120,25 @@ fun EditNumberField(
             keyboardType = KeyboardType.Number
         )
     )
+}
+
+@Composable
+fun RoundTheTipRow(
+    roundUp: Boolean,
+    onRoundUpChanged: (Boolean)->Unit,
+){
+    Row(
+        modifier=Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ){
+        Text(
+            text=stringResource(R.string.round_up_tip),
+            modifier=Modifier.weight(1f)
+        )
+
+        Switch(
+            checked = roundUp,
+            onCheckedChange = onRoundUpChanged
+        )
+    }
 }
