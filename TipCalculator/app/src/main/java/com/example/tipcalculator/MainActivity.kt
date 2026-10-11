@@ -15,6 +15,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 
 class MainActivity: ComponentActivity(){
     override fun onCreate(savedInstanceState: Bundle?){
@@ -29,7 +33,7 @@ class MainActivity: ComponentActivity(){
 
 @Composable
 fun TipLayout(){
-    var amountInput="0"
+    var amountInput by remember {mutableStateOf("")}
 
     Column(
         modifier=Modifier
