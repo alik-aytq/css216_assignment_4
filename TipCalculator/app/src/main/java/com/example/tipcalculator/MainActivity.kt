@@ -23,6 +23,7 @@ import java.text.NumberFormat
 import kotlin.math.ceil
 import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.focus.FocusDirection
@@ -39,9 +40,9 @@ class MainActivity: ComponentActivity(){
 
 @Composable
 fun TipLayout(){
-    var amountInput by remember {mutableStateOf("")}
-    var tipPercentInput by remember { mutableStateOf("") }
-    var roundUp by remember {mutableStateOf(false)}
+    var amountInput by rememberSaveable() {mutableStateOf("")}
+    var tipPercentInput by rememberSaveable() { mutableStateOf("") }
+    var roundUp by rememberSaveable() {mutableStateOf(false)}
     val amount = amountInput.toDoubleOrNull() ?: 0.0
     val tipPercent=tipPercentInput.toDoubleOrNull() ?: 15.0
     val tip = calculateTip(amount,tipPercent,roundUp)
