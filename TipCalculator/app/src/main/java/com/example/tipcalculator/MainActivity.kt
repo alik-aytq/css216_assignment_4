@@ -35,6 +35,8 @@ class MainActivity: ComponentActivity(){
 @Composable
 fun TipLayout(){
     var amountInput by remember {mutableStateOf("")}
+    val amount = amountInput.toDoubleOrNull() ?: 0.0
+    val tip = calculateTip(amount)
 
     Column(
         modifier=Modifier
@@ -63,7 +65,7 @@ fun TipLayout(){
         Spacer(modifier=Modifier.height(32.dp))
 
         Text(
-            text="Tip Amount: ",
+            text="Tip Amount: $tip",
             fontSize=20.sp
         )
     }
