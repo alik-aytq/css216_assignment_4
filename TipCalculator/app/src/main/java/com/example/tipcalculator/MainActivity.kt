@@ -36,6 +36,7 @@ class MainActivity: ComponentActivity(){
 fun TipLayout(){
     var amountInput by remember {mutableStateOf("")}
     var tipPercentInput by remember { mutableStateOf("") }
+    var roundUp by remember {mutableStateOf(false)}
     val amount = amountInput.toDoubleOrNull() ?: 0.0
     val tipPercent=tipPercentInput.toDoubleOrNull() ?: 15.0
     val tip = calculateTip(amount,tipPercent)
@@ -74,6 +75,23 @@ fun TipLayout(){
                 keyboardType = KeyboardType.Number
             )
         )
+
+        Spacer(modifier=Modifier.height(16.dp))
+
+        Row(
+            modifier=Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Text(
+                text="Round up tip?",
+                modifier=Modifier.weight(1f)
+            )
+
+            Switch(
+                checked = roundUp,
+                onCheckedChange = {roundUp=it}
+            )
+        }
 
         Spacer(modifier=Modifier.height(32.dp))
 
