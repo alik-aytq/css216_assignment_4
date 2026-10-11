@@ -49,5 +49,25 @@ fun ArtSpaceLayout() {
                 .height(350.dp),
             contentScale=ContentScale.Fit
         )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Text(
+                text = "Fallen Angel",
+                fontSize = 24.sp
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                text = "Alexandre Cabanel (1868)",
+                fontSize = 16.sp
+            )
+        }
     }
 }
