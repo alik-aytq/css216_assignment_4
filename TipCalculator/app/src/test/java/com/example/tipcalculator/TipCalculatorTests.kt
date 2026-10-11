@@ -1,4 +1,3 @@
-
 package com.example.tipcalculator
 
 import org.junit.Assert.assertEquals
