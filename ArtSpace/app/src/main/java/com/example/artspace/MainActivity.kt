@@ -10,6 +10,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.layout.ContentScale
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,9 +41,13 @@ fun ArtSpaceLayout() {
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        Text(
-            text = "Artwork will be displayed here",
-            fontSize = 18.sp
+        Image(
+            painter=painterResource(R.drawable.fallen_angel),
+            contentDescription="Fallen Angel by Alexandre Cabanel",
+            modifier=Modifier
+                .fillMaxWidth()
+                .height(350.dp),
+            contentScale=ContentScale.Fit
         )
     }
 }
