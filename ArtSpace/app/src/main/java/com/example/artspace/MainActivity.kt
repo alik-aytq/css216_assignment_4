@@ -25,8 +25,37 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
+data class Artwork(
+    val image: Int,
+    val title: String,
+    val artist: String,
+    val year: Int
+)
+
 @Composable
 fun ArtSpaceLayout() {
+    val artworks = listOf(
+        Artwork(
+            R.drawable.fallen_angel,
+            "Fallen Angel",
+            "Alexandre Cabanel",
+            1868
+        ),
+        Artwork(
+            R.drawable.creation_of_adam,
+            "Creation of Adam",
+            "Michelangelo",
+            1510
+        ),
+        Artwork(
+            R.drawable.wanderer_above_the_sea,
+            "The Wanderer above the sea",
+            "Caspar David Friedrich",
+            1818
+        )
+    )
+
     Column(
         modifier = Modifier
             .fillMaxSize()
