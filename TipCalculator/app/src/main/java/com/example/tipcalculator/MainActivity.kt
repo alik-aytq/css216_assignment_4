@@ -35,6 +35,7 @@ class MainActivity: ComponentActivity(){
 @Composable
 fun TipLayout(){
     var amountInput by remember {mutableStateOf("")}
+    var tipPercentInput by remember { mutableStateOf("") }
     val amount = amountInput.toDoubleOrNull() ?: 0.0
     val tip = calculateTip(amount)
 
@@ -57,6 +58,17 @@ fun TipLayout(){
             value=amountInput,
             onValueChange = {amountInput=it},
             label={Text("Bill Amount")},
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number
+            )
+        )
+
+        Spacer(modifier=Modifier.height(16.dp))
+
+        TextField(
+            value=tipPercentInput,
+            onValueChange = {tipPercentInput=it},
+            label={Text("Tip Percentage")},
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number
             )
