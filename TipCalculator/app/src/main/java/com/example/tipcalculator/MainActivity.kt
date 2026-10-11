@@ -21,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import java.text.NumberFormat
 import kotlin.math.ceil
+import androidx.compose.ui.res.stringResource
 
 class MainActivity: ComponentActivity(){
     override fun onCreate(savedInstanceState: Bundle?){
@@ -52,7 +53,7 @@ fun TipLayout(){
         verticalArrangement = Arrangement.Center
     ){
         Text(
-            text="Calculate Tip",
+            text=stringResource(R.string.calculate_tip),
             fontSize=24.sp
         )
         Spacer(modifier=Modifier.height(32.dp))
@@ -60,7 +61,7 @@ fun TipLayout(){
         TextField(
             value=amountInput,
             onValueChange = {amountInput=it},
-            label={Text("Bill Amount")},
+            label={Text(stringResource(R.string.bill_amount))},
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number
             )
@@ -71,7 +72,7 @@ fun TipLayout(){
         TextField(
             value=tipPercentInput,
             onValueChange = {tipPercentInput=it},
-            label={Text("Tip Percentage")},
+            label={Text(stringResource(R.string.tip_percentage))},
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number
             )
@@ -84,7 +85,7 @@ fun TipLayout(){
             verticalAlignment = Alignment.CenterVertically
         ){
             Text(
-                text="Round up tip?",
+                text=stringResource(R.string.round_up_tip),
                 modifier=Modifier.weight(1f)
             )
 
@@ -97,7 +98,7 @@ fun TipLayout(){
         Spacer(modifier=Modifier.height(32.dp))
 
         Text(
-            text="Tip Amount: $tip",
+            text=stringResource(R.string.tip_amount, tip),
             fontSize=20.sp
         )
     }
