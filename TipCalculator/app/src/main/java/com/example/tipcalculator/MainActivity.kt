@@ -23,8 +23,9 @@ import java.text.NumberFormat
 import kotlin.math.ceil
 import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.focus.FocusDirection
 class MainActivity: ComponentActivity(){
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -63,7 +64,8 @@ fun TipLayout(){
         EditNumberField(
             value=amountInput,
             onValueChange = {amountInput=it},
-            label=stringResource(R.string.bill_amount)
+            label=stringResource(R.string.bill_amount),
+            imeAction=ImeAction.Next
         )
 
         Spacer(modifier=Modifier.height(16.dp))
@@ -71,7 +73,8 @@ fun TipLayout(){
         EditNumberField(
             value=tipPercentInput,
             onValueChange = {tipPercentInput=it},
-            label = stringResource(R.string.tip_percentage)
+            label = stringResource(R.string.tip_percentage),
+            imeAction=ImeAction.Done
         )
 
         Spacer(modifier=Modifier.height(16.dp))
@@ -112,9 +115,10 @@ private fun calculateTip(
 fun EditNumberField(
     value: String,
     onValueChange: (String)-> Unit,
-    label: String
+    label: String,
+    imeAction: ImeAction
 ){
-    val keyboardController = LocalSoftwareKeyboardController.current
+    val focusManager=LocalFocusManager.current
 
     TextField(
         value=value,
@@ -122,11 +126,14 @@ fun EditNumberField(
         label={Text(label)},
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Number,
-            imeAction = ImeAction.Done
+            imeAction = imeAction
         ),
         keyboardActions = KeyboardActions(
+            onNext = {
+               focusManager.moveFocus(FocusDirection.Down)
+            },
             onDone = {
-               keyboardController?.hide()
+                focusManager.clearFocus()
             }
         )
     )
