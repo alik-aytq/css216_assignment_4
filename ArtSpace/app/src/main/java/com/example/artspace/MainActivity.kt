@@ -13,6 +13,10 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.Image
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableIntStateOf
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +60,10 @@ fun ArtSpaceLayout() {
         )
     )
 
+    var currentIndex by remember { mutableIntStateOf(0) }
+
+    val currentArtwork = artworks[currentIndex]
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -71,13 +79,14 @@ fun ArtSpaceLayout() {
         Spacer(modifier = Modifier.height(32.dp))
 
         Image(
-            painter=painterResource(R.drawable.fallen_angel),
-            contentDescription="Fallen Angel by Alexandre Cabanel",
-            modifier=Modifier
+            painter = painterResource(currentArtwork.image),
+            contentDescription = currentArtwork.title,
+            modifier = Modifier
                 .fillMaxWidth()
                 .height(350.dp),
-            contentScale=ContentScale.Fit
+            contentScale = ContentScale.Fit
         )
+
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -87,14 +96,14 @@ fun ArtSpaceLayout() {
                 .padding(16.dp)
         ) {
             Text(
-                text = "Fallen Angel",
+                text = currentArtwork.title,
                 fontSize = 24.sp
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "Alexandre Cabanel (1868)",
+                text = "${currentArtwork.artist} (${currentArtwork.year})",
                 fontSize = 16.sp
             )
         }
@@ -107,19 +116,29 @@ fun ArtSpaceLayout() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Button(
-                onClick = { },
+                onClick = {
+                    currentIndex = if (currentIndex > 0) {
+                        currentIndex - 1
+                    } else {
+                        artworks.lastIndex
+                    }
+                },
                 modifier = Modifier.width(120.dp)
             ) {
                 Text("Previous")
             }
-
             Button(
-                onClick = { },
+                onClick = {
+                    currentIndex = if (currentIndex < artworks.lastIndex) {
+                        currentIndex + 1
+                    } else {
+                        0
+                    }
+                },
                 modifier = Modifier.width(120.dp)
             ) {
                 Text("Next")
             }
         }
-
     }
 }
