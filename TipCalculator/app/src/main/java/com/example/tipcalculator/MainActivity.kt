@@ -22,7 +22,9 @@ import androidx.compose.runtime.remember
 import java.text.NumberFormat
 import kotlin.math.ceil
 import androidx.compose.ui.res.stringResource
-
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.ImeAction
 class MainActivity: ComponentActivity(){
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -112,12 +114,20 @@ fun EditNumberField(
     onValueChange: (String)-> Unit,
     label: String
 ){
+    val keyboardController = LocalSoftwareKeyboardController.current
+
     TextField(
         value=value,
         onValueChange=onValueChange,
         label={Text(label)},
         keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Number
+            keyboardType = KeyboardType.Number,
+            imeAction = ImeAction.Done
+        ),
+        keyboardActions = KeyboardActions(
+            onDone = {
+               keyboardController?.hide()
+            }
         )
     )
 }
