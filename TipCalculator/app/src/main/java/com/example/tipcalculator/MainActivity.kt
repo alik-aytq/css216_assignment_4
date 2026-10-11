@@ -13,6 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.ui.text.input.KeyboardType
 
 class MainActivity: ComponentActivity(){
     override fun onCreate(savedInstanceState: Bundle?){
@@ -27,6 +29,8 @@ class MainActivity: ComponentActivity(){
 
 @Composable
 fun TipLayout(){
+    var amountInput="0"
+
     Column(
         modifier=Modifier
             .statusBarsPadding()
@@ -39,6 +43,16 @@ fun TipLayout(){
         Text(
             text="Calculate Tip",
             fontSize=24.sp
+        )
+        Spacer(modifier=Modifier.height(32.dp))
+
+        TextField(
+            value=amountInput,
+            onValueChange = {amountInput=it},
+            label={Text("Bill Amount")},
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number
+            )
         )
 
         Spacer(modifier=Modifier.height(32.dp))
