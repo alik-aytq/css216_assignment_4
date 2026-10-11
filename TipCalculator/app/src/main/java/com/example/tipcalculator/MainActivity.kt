@@ -19,6 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import java.text.NumberFormat
 
 class MainActivity: ComponentActivity(){
     override fun onCreate(savedInstanceState: Bundle?){
@@ -66,4 +67,12 @@ fun TipLayout(){
             fontSize=20.sp
         )
     }
+}
+
+private fun calculateTip(
+    amount: Double,
+    tipPercent: Double =15.0
+): String{
+    val tip = amount*tipPercent/100
+    return NumberFormat.getCurrencyInstance().format(tip)
 }
